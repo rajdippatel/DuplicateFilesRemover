@@ -11,10 +11,11 @@ namespace DuplicateFilesRemover
         public static void Main(string[] args)
         {
             var duplicateFilesManager = new DuplicateFilesManager();
-            duplicateFilesManager.AddScanDirectory(@"V:\Family-Full\Images\Uncategorized");
+            duplicateFilesManager.AddScanDirectory(@"V:\Family-Full\Images\Uncategorized\");
+            // duplicateFilesManager.AddScanDirectory(@"X:\");
             // duplicateFilesManager.AddScanDirectory(@"W:\");
             // duplicateFilesManager.AddScanDirectory(@"D:\Test-2");
-            duplicateFilesManager.Scan();
+            duplicateFilesManager.ScanWithDelete();
             // duplicateFilesManager.RemoveDuplicates();
         }
     }

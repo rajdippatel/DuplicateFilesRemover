@@ -19,7 +19,7 @@ namespace DuplicateFilesRemover
         private byte[] buffer2 = new byte[bufferSize];
 
         private bool SkipZeroLengthFiles = true;
-        private bool DeleteInstantly = true;
+        public bool DeleteInstantly { get; set; } = false;
 
         public void AddScanDirectory(string directory)
         {
@@ -33,6 +33,12 @@ namespace DuplicateFilesRemover
         {
             LoadFiles();
             ScanDuplicates();
+        }
+
+        public void ScanWithDelete()
+        {
+            DeleteInstantly = true;
+            Scan();
         }
 
         public void RemoveDuplicates()
@@ -54,21 +60,61 @@ namespace DuplicateFilesRemover
             }
         }
 
+        private static int FilePathSorter(string filePath1, string filePath2)
+        {
+            int result;
+            var filePath1Parts = Path.GetDirectoryName(filePath1).Split(Path.DirectorySeparatorChar);
+            var filePath2Parts = Path.GetDirectoryName(filePath2).Split(Path.DirectorySeparatorChar);
+
+            for (int i = 0; i < Math.Max(filePath1Parts.Length, filePath1Parts.Length); i++)
+            {
+                string filePath1Part = i < filePath1Parts.Length ? filePath1Parts[i] : string.Empty;
+                string filePath2Part = i < filePath2Parts.Length ? filePath2Parts[i] : string.Empty;
+                
+                result = filePath1Part.CompareTo(filePath2Part);
+                if (result != 0)
+                {
+                    return result;
+                }
+            }
+
+            var fileName1 = Path.GetFileNameWithoutExtension(filePath1);
+            var fileName2 = Path.GetFileNameWithoutExtension(filePath2);
+
+            result = fileName1.CompareTo(fileName2);
+            if (result != 0)
+            {
+                return result;
+            }
+
+            var fileExtension1 = Path.GetFileNameWithoutExtension(filePath1);
+            var fileExtension2 = Path.GetFileNameWithoutExtension(filePath2);
+
+            result = fileExtension1.CompareTo(fileExtension2);
+            if (result != 0)
+            {
+                return result;
+            }
+            return result;
+        }
+
         public void RemoveDuplicates(DuplicateFileGroup duplicateFileGroup)
         {
             var sortedFilePaths = duplicateFileGroup.Files.Select(o => o.Path).ToList();
-            sortedFilePaths.Sort();
+            sortedFilePaths.Sort(FilePathSorter);
 
             for (int i = 1; i < sortedFilePaths.Count; i++)
             {
                 var fileInfo = new FileInfo(sortedFilePaths[i]);
                 if (fileInfo.Exists)
                 {
-                    Console.WriteLine("File Deleted :- Size : " + fileInfo.Length + ", Path : " + sortedFilePaths[i]);
+                    long fileLength = fileInfo.Length;
                     fileInfo.Delete();
+                    Console.WriteLine("File Deleted :- Size : " + fileLength + ", Path : " + sortedFilePaths[i]);
                 }
             }
         }
+
 
         private void LoadFiles()
         {
@@ -105,9 +151,13 @@ namespace DuplicateFilesRemover
         private void ScanDuplicates()
         {
             var filesBySize = files.GroupBy(o => o.Value.Size).Where(o => o.Count() > 1).Select(o => o.Select(o1 => o1.Value).ToList()).ToList();
+            // OrderByFileSize
+            filesBySize = filesBySize.OrderByDescending(o => o.First().Size).ToList();
 
-            foreach (var files in filesBySize)
+            for (int i = 0; i < filesBySize.Count; i++)
             {
+                Console.WriteLine("Progress : " + (i * 100/ filesBySize.Count)  + "%");
+                List<File>? files = filesBySize[i];
                 foreach (var file in files)
                 {
                     if (SkipZeroLengthFiles)
