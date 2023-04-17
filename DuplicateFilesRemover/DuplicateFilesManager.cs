@@ -12,6 +12,7 @@ namespace DuplicateFilesRemover
         private List<DuplicateFileGroup> duplicateFileGroups = new List<DuplicateFileGroup>();
 
         private List<string> scanDirectories = new List<string>();
+        private List<string> skipDirectories = new List<string>();
 
         private const long bufferSize = 1 * 1024;
 
@@ -26,7 +27,17 @@ namespace DuplicateFilesRemover
             if (string.IsNullOrEmpty(directory))
                 throw new ArgumentException(nameof(directory));
 
-            scanDirectories.Add(directory);
+            if(!scanDirectories.Contains(directory))
+                scanDirectories.Add(directory);
+        }
+
+        public void AddSkipDirectory(string directory)
+        {
+            if (string.IsNullOrEmpty(directory))
+                throw new ArgumentException(nameof(directory));
+
+            if (!skipDirectories.Contains(directory))
+                skipDirectories.Add(directory);
         }
 
         public void Scan()
@@ -45,18 +56,7 @@ namespace DuplicateFilesRemover
         {
             foreach (var duplicateFileGroup in duplicateFileGroups)
             {
-                var sortedFilePaths = duplicateFileGroup.Files.Select(o => o.Path).ToList();
-                sortedFilePaths.Sort();
-
-                for (int i = 1; i < sortedFilePaths.Count; i++)
-                {
-                    var fileInfo = new FileInfo(sortedFilePaths[i]);
-                    if (fileInfo.Exists)
-                    {
-                        Console.WriteLine("File Deleted :- Size : " + fileInfo.Length + ", Path : " + sortedFilePaths[i]);
-                        fileInfo.Delete();
-                    }
-                }
+                RemoveDuplicates(duplicateFileGroup);
             }
         }
 
@@ -109,8 +109,15 @@ namespace DuplicateFilesRemover
                 if (fileInfo.Exists)
                 {
                     long fileLength = fileInfo.Length;
-                    fileInfo.Delete();
-                    Console.WriteLine("File Deleted :- Size : " + fileLength + ", Path : " + sortedFilePaths[i]);
+                    try
+                    {
+                        fileInfo.Delete();
+                        Console.WriteLine("File Deleted :- Size : " + fileLength + ", Path : " + sortedFilePaths[i]);
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine("File delete failed :- Size : " + fileLength + ", Exception : " + ex.ToString());
+                    }
                 }
             }
         }
@@ -120,11 +127,16 @@ namespace DuplicateFilesRemover
         {
             foreach (var directory in scanDirectories)
             {
-                LoadDirectory(new DirectoryInfo(directory));
+                LoadDirectory(new DirectoryInfo(directory), true);
+            }
+
+            foreach (var directory in skipDirectories)
+            {
+                LoadDirectory(new DirectoryInfo(directory), false);
             }
         }
 
-        private void LoadDirectory(DirectoryInfo directoryInfo)
+        private void LoadDirectory(DirectoryInfo directoryInfo, bool add)
         {
             if (directoryInfo == null || !directoryInfo.Exists)
                 return;
@@ -134,12 +146,19 @@ namespace DuplicateFilesRemover
                 foreach (var fileInfo in directoryInfo.EnumerateFiles())
                 {
                     var fileDetail = new File(fileInfo.FullName) { Size = fileInfo.Length };
-                    files.Add(fileDetail.Path, fileDetail);
+                    if (add)
+                    {
+                        files.Add(fileDetail.Path, fileDetail);
+                    }
+                    else
+                    {
+                        files.Remove(fileDetail.Path);
+                    }
                 }
 
                 foreach (var childDirectoryInfo in directoryInfo.EnumerateDirectories())
                 {
-                    LoadDirectory(childDirectoryInfo);
+                    LoadDirectory(childDirectoryInfo, add);
                 }
             }
             catch(Exception ex)

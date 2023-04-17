@@ -10,13 +10,25 @@ namespace DuplicateFilesRemover
     {
         public static void Main(string[] args)
         {
-            var duplicateFilesManager = new DuplicateFilesManager();
-            duplicateFilesManager.AddScanDirectory(@"V:\Family-Full\Images\Uncategorized\");
-            // duplicateFilesManager.AddScanDirectory(@"X:\");
-            // duplicateFilesManager.AddScanDirectory(@"W:\");
-            // duplicateFilesManager.AddScanDirectory(@"D:\Test-2");
-            duplicateFilesManager.ScanWithDelete();
-            // duplicateFilesManager.RemoveDuplicates();
+            {
+                var duplicateFilesManager = new DuplicateFilesManager();
+                duplicateFilesManager.AddScanDirectory(@"V:\Family-Full\Images\");
+                duplicateFilesManager.AddScanDirectory(@"V:\M.K.Patel\");
+                duplicateFilesManager.AddScanDirectory(@"V:\Dharmi\");
+                duplicateFilesManager.AddScanDirectory(@"V:\Jaydip\");
+                duplicateFilesManager.AddScanDirectory(@"V:\Jignesha\");
+                duplicateFilesManager.AddScanDirectory(@"V:\Special\");
+                duplicateFilesManager.AddScanDirectory(@"V:\Entertainment\");
+                duplicateFilesManager.ScanWithDelete();
+                // duplicateFilesManager.RemoveDuplicates();
+            }
+
+            //{
+            //    var duplicateFilesManager = new DuplicateFilesManager();
+            //    
+            //    duplicateFilesManager.ScanWithDelete();
+            //}
+
         }
     }
 }
