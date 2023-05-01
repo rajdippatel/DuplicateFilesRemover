@@ -25,6 +25,12 @@ namespace DuplicateFilesRemover
 
             //{
             //    var duplicateFilesManager = new DuplicateFilesManager();
+            //    duplicateFilesManager.AddScanDirectory(@"Y:\");
+            //    duplicateFilesManager.ScanWithDelete();
+            //}
+
+            //{
+            //    var duplicateFilesManager = new DuplicateFilesManager();
             //    
             //    duplicateFilesManager.ScanWithDelete();
             //}
