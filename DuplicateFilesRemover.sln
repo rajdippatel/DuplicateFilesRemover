@@ -5,7 +5,13 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuplicateFilesRemover", "DuplicateFilesRemover\DuplicateFilesRemover.csproj", "{310D4FA1-2568-4933-B50E-3587BFF2CD31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixWindowsCopiedFileNames", "FixWindowsCopiedFileNames\FixWindowsCopiedFileNames.csproj", "{5F875DE3-2EE3-4C19-9531-8A87CE9F9FA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixWindowsCopiedFileNames", "FixWindowsCopiedFileNames\FixWindowsCopiedFileNames.csproj", "{5F875DE3-2EE3-4C19-9531-8A87CE9F9FA0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmptyDirectoryRemover", "EmptyDirectoryRemover\EmptyDirectoryRemover.csproj", "{78A943F5-5432-4414-96C5-125034010820}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdenticalImageDetector", "IdenticalImageDetector\IdenticalImageDetector.csproj", "{AFFDA92A-C0B4-4E39-ABEA-78C37A534B6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitRemoteUrlUpdater", "GitRemoteUrlUpdater\GitRemoteUrlUpdater.csproj", "{A9135869-D248-4C66-9231-82BE8C036982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{5F875DE3-2EE3-4C19-9531-8A87CE9F9FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F875DE3-2EE3-4C19-9531-8A87CE9F9FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F875DE3-2EE3-4C19-9531-8A87CE9F9FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78A943F5-5432-4414-96C5-125034010820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78A943F5-5432-4414-96C5-125034010820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78A943F5-5432-4414-96C5-125034010820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78A943F5-5432-4414-96C5-125034010820}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFFDA92A-C0B4-4E39-ABEA-78C37A534B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFFDA92A-C0B4-4E39-ABEA-78C37A534B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFFDA92A-C0B4-4E39-ABEA-78C37A534B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFFDA92A-C0B4-4E39-ABEA-78C37A534B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9135869-D248-4C66-9231-82BE8C036982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9135869-D248-4C66-9231-82BE8C036982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9135869-D248-4C66-9231-82BE8C036982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9135869-D248-4C66-9231-82BE8C036982}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

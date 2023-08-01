@@ -12,13 +12,25 @@ namespace DuplicateFilesRemover
         {
             {
                 var duplicateFilesManager = new DuplicateFilesManager();
-                duplicateFilesManager.AddScanDirectory(@"V:\Family-Full\Images\");
-                duplicateFilesManager.AddScanDirectory(@"V:\M.K.Patel\");
-                duplicateFilesManager.AddScanDirectory(@"V:\Dharmi\");
-                duplicateFilesManager.AddScanDirectory(@"V:\Jaydip\");
-                duplicateFilesManager.AddScanDirectory(@"V:\Jignesha\");
-                duplicateFilesManager.AddScanDirectory(@"V:\Special\");
-                duplicateFilesManager.AddScanDirectory(@"V:\Entertainment\");
+                // duplicateFilesManager.AddScanDirectory(@"V:\Family-Full\Images\");
+                //duplicateFilesManager.AddScanDirectory(@"V:\M.K.Patel\");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Dharmi\");
+                //duplicateFilesManager.AddScanDirectory(@"V:\A\");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Jaydip\");
+                duplicateFilesManager.AddScanDirectory(@"V:\Raj\Backup");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Jignesha\");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Special\");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Entertainment\");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Family-Full\Images\Uncategorized\");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Raj\BOOKS");
+                //duplicateFilesManager.AddScanDirectory(@"C:\Users\RAJ\Desktop\Test");
+                //duplicateFilesManager.AddScanDirectory(@"C:\Users\RAJ\Desktop\Test");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Family-Full\Images\Dipika");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Raj\OneDrive");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Raj\OneDrive - Backup");
+                //duplicateFilesManager.AddScanDirectory(@"V:\Raj\OneDrive - Copy");
+                //duplicateFilesManager.AddScanDirectory(@"X:\");
+                //duplicateFilesManager.AddScanDirectory(@"D:\Raj\Backup");
                 duplicateFilesManager.ScanWithDelete();
                 // duplicateFilesManager.RemoveDuplicates();
             }

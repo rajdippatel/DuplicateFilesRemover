@@ -66,7 +66,7 @@ namespace DuplicateFilesRemover
             var filePath1Parts = Path.GetDirectoryName(filePath1).Split(Path.DirectorySeparatorChar);
             var filePath2Parts = Path.GetDirectoryName(filePath2).Split(Path.DirectorySeparatorChar);
 
-            for (int i = 0; i < Math.Max(filePath1Parts.Length, filePath1Parts.Length); i++)
+            for (int i = 0; i < Math.Max(filePath1Parts.Length, filePath2Parts.Length); i++)
             {
                 string filePath1Part = i < filePath1Parts.Length ? filePath1Parts[i] : string.Empty;
                 string filePath2Part = i < filePath2Parts.Length ? filePath2Parts[i] : string.Empty;
